@@ -51,11 +51,11 @@ jobs:
         run: |
           terraform init \
           -backend-config=bucket=apollo416-account-terraform-prd \
-          -backend-config=key=app/prd/terraform.tfstate \
+          -backend-config=key=prd/app/terraform.tfstate \
           -backend-config=dynamodb_table=apollo416-account-terraform-prd
 
       - name: Terraform plan
-        run: terraform plan -var='env=dev' -var='rev=main' -out=tfplan.out
+        run: terraform plan -var='env=prd' -var='rev=main' -out=tfplan.out
 
       - name: Terraform apply
         run: terraform apply -auto-approve tfplan.out
