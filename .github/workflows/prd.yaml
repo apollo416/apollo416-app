@@ -50,9 +50,9 @@ jobs:
       - name: Initialize Terraform
         run: |
           terraform init \
-          -backend-config=bucket=apollo416-account-terraform-prd \
+          -backend-config=bucket=apollo416-terraform-infra-state-prd \
           -backend-config=key=prd/app/terraform.tfstate \
-          -backend-config=dynamodb_table=apollo416-account-terraform-prd
+          -backend-config=dynamodb_table=apollo416-terraform-infra-state-prd
 
       - name: Terraform plan
         run: terraform plan -var='env=prd' -var='rev=main' -out=tfplan.out
