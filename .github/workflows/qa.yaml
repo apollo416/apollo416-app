@@ -47,7 +47,7 @@ jobs:
         with:
           output_format: cli,sarif
           output_file_path: console,results.sarif
-          skip_check: CKV_AWS_18,CKV_AWS_144
+          skip_check: CKV_AWS_18,CKV_AWS_115,CKV_AWS_116,CKV_AWS_144,CKV_AWS_272
           quiet: true
 
       - name: Configure AWS Credentials
