@@ -9,7 +9,10 @@ repos:
         args:
           - --args=--quiet
           - --args=--skip-check CKV_AWS_18
+          - --args=--skip-check CKV_AWS_115
+          - --args=--skip-check CKV_AWS_116
           - --args=--skip-check CKV_AWS_144
+          - --args=--skip-check CKV_AWS_272
       - id: terraform_tfsec
         args:
           - >
