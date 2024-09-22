@@ -107,7 +107,7 @@ resource "aws_vpc_security_group_egress_rule" "main" {
 }
 
 resource "aws_codeguruprofiler_profiling_group" "main" {
-  name             = "EngineCore"
+  name             = "${local.function_name}-pg"
   compute_platform = "AWSLambda"
   agent_orchestration_config {
     profiling_enabled = true
