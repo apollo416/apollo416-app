@@ -28,22 +28,12 @@ module "decision_workflow" {
   EOF
 }
 
-data "aws_iam_policy_document" "policy" {
-  statement {
-    effect = "Allow"
-    actions = [
-      "lambda:InvokeFunction"
-    ]
-    resources = [
-      module.decision_engine_core.arn
-    ]
-  }
-}
-
-resource "aws_iam_role_policy" "main" {
-  name   = "${module.decision_workflow.name}-${module.decision_engine_core.name}-policy"
-  role   = module.decision_workflow.iam_role_name
-  policy = data.aws_iam_policy_document.policy.json
+module "allow_sfn_call_function" {
+  source        = "./modules/allow_sfn_call_function"
+  workflow_name = module.decision_workflow.name
+  function_name = module.decision_engine_core.name
+  function_arn  = module.decision_engine_core.arn
+  sfn_role_name = module.decision_workflow.iam_role_name
 }
 
 resource "aws_cloudwatch_dashboard" "main" {
