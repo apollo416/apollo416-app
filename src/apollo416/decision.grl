@@ -1,0 +1,7 @@
+
+rule AgeCheck "Check the age of the customer" {
+    when
+      Decision.Age > 18 && Decision.Approved == false
+    then
+      Decision.Approved = true;
+}

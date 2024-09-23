@@ -8,8 +8,8 @@ variable "description" {
   type        = string
 }
 
-variable "source_file" {
-  description = "The source file for the lambda"
+variable "file" {
+  description = "The binary file for the lambda"
   type        = string
 }
 

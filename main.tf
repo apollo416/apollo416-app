@@ -1,11 +1,11 @@
 
-module "decision_engine_core" {
+module "engine" {
   source      = "./modules/function"
-  name        = "decision-engine-core"
+  name        = "decision"
   description = "Decision Engine Core"
   env         = var.env
   rev         = var.rev
-  source_file = "${path.module}/src/decision_engine_core/main.py"
+  file        = "${path.module}/bin/engine/bootstrap"
 }
 
 module "decision_workflow" {
@@ -20,7 +20,7 @@ module "decision_workflow" {
       "States": {
         "HelloWorld": {
           "Type": "Task",
-          "Resource": "${module.decision_engine_core.arn}",
+          "Resource": "${module.engine.arn}",
           "End": true
         }
       }
@@ -31,8 +31,8 @@ module "decision_workflow" {
 module "allow_sfn_call_function" {
   source        = "./modules/allow_sfn_call_function"
   workflow_name = module.decision_workflow.name
-  function_name = module.decision_engine_core.name
-  function_arn  = module.decision_engine_core.arn
+  function_name = module.engine.name
+  function_arn  = module.engine.arn
   sfn_role_name = module.decision_workflow.iam_role_name
 }
 
